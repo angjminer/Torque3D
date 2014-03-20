@@ -21,12 +21,6 @@
 //					must ensure BIOS settings is not configured to restrict CPUID functionalities.
 //-------------------------------------------------------------------------------------------------
 
-#if defined(TORQUE_OS_LINUX) || defined(LINUX)
-
-// TODO GCC code don't compile on Release with optimizations, mover code to platform layer
-
-#else
-
 #include "platform/platform.h"
 #include "platform/platformCPUCount.h"
 
@@ -337,13 +331,13 @@ multi_core:
 #ifdef TORQUE_COMPILER_GCC
          asm
         (
-    #ifdef __x86_64__		// define constant to compile
+#ifdef __x86_64__		// define constant to compile  
             "push %%rcx\n\t"		// under 64-bit Linux
             "push %%rax\n\t"
-    #else
+#else
             "pushl %%ecx\n\t"
             "pushl %%eax\n\t"
-    #endif
+#endif
     //		"movl $count, %%eax\n\t" //done by Assembler below
             "xorl %%ecx, %%ecx"
     //		"movl %%ecx, MaskWidth\n\t" //done by Assembler below
@@ -365,13 +359,13 @@ multi_core:
         asm
         (
             "next:\n\t"
-    #ifdef __x86_64__
+#ifdef __x86_64__
             "pop %rax\n\t"
             "pop %rcx"
-    #else
+#else
             "popl %eax\n\t"
             "popl %ecx"
-    #endif
+#endif
         );
 
 #elif defined( TORQUE_COMPILER_VISUALC )
@@ -670,6 +664,4 @@ next:
       }
 
 } // namespace CPUInfo
-#endif
-
 #endif

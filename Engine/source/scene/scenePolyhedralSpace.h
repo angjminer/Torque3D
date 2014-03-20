@@ -33,11 +33,11 @@
 
 
 ///
-class ScenePolyhedralSpace : public ScenePolyhedralObject
+class ScenePolyhedralSpace : public ScenePolyhedralObject< SceneSpace >
 {
    public:
 
-      typedef ScenePolyhedralObject Parent;
+      typedef ScenePolyhedralObject< SceneSpace > Parent;
 
       ScenePolyhedralSpace() {}
       ScenePolyhedralSpace( const PolyhedronType& polyhedron )

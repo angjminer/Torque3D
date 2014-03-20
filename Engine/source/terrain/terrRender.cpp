@@ -62,7 +62,7 @@ GFX_ImplementTextureProfile( TerrainLayerTexProfile,
                             GFXTextureProfile::DiffuseMap, 
                             GFXTextureProfile::PreserveSize | 
                             GFXTextureProfile::Dynamic,
-                            GFXTextureProfile::NONE );
+                            GFXTextureProfile::None );
 
 
 void TerrainBlock::_onFlushMaterials()

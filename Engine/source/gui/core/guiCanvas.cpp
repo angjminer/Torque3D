@@ -2264,7 +2264,7 @@ DefineEngineMethod( GuiCanvas, getMouseControl, S32, (),,
    if (control)
       return control->getId();
    
-   return 0;
+   return NULL;
 }
 
 DefineEngineFunction(excludeOtherInstance, bool, (const char* appIdentifer),,

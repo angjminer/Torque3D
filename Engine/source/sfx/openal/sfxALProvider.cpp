@@ -24,7 +24,6 @@
 #include "sfx/sfxProvider.h"
 #include "sfx/openal/sfxALDevice.h"
 #include "sfx/openal/aldlist.h"
-#include "sfx/openal/LoadOAL.h"
 
 #include "core/strings/stringFunctions.h"
 #include "console/console.h"

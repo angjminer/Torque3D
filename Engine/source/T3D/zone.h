@@ -42,11 +42,11 @@
 /// that has its world box coincide with the world box of a zone is considered
 /// to be part of that zone.  As such, objects can be in multiple zones at
 /// the same time.
-class Zone : public SceneAmbientSoundObject
+class Zone : public SceneAmbientSoundObject< ScenePolyhedralZone >
 {
    public:
 
-      typedef SceneAmbientSoundObject Parent;
+      typedef SceneAmbientSoundObject< ScenePolyhedralZone > Parent;
 
    protected:
 

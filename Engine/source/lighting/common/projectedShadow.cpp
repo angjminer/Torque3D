@@ -62,14 +62,14 @@ GFX_ImplementTextureProfile( BLProjectedShadowProfile,
                               GFXTextureProfile::PreserveSize | 
                               GFXTextureProfile::RenderTarget |
                               GFXTextureProfile::Pooled,
-                              GFXTextureProfile::NONE );
+                              GFXTextureProfile::None );
 
 GFX_ImplementTextureProfile( BLProjectedShadowZProfile,
                               GFXTextureProfile::DiffuseMap,
                               GFXTextureProfile::PreserveSize | 
                               GFXTextureProfile::ZTarget |
                               GFXTextureProfile::Pooled,
-                              GFXTextureProfile::NONE );
+                              GFXTextureProfile::None );
 
 
 ProjectedShadow::ProjectedShadow( SceneObject *object )

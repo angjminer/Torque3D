@@ -27,7 +27,6 @@
 #include "math/mPolyhedron.h"
 #endif
 
-#include "scene/zones/sceneSimpleZone.h"
 
 /// Shared interface for polyhedral objects.
 struct IScenePolyhedralObject
@@ -39,12 +38,13 @@ struct IScenePolyhedralObject
 
 /// Helper template for mixing a polyhedral volume definition into
 /// the superclass hierarchy of a SceneSpace-derived class.
-class ScenePolyhedralObject : public SceneSimpleZone, public IScenePolyhedralObject
+template< typename Base, typename P = Polyhedron >
+class ScenePolyhedralObject : public Base, public IScenePolyhedralObject
 {
    public:
 
-      typedef SceneSimpleZone Parent;
-      typedef Polyhedron PolyhedronType;
+      typedef Base Parent;
+      typedef P PolyhedronType;
 
       enum
       {

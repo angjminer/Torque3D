@@ -23,18 +23,18 @@
 #ifndef _SCENEAMBIENTSOUNDOBJECT_H_
 #define _SCENEAMBIENTSOUNDOBJECT_H_
 
-#include "../zones/scenePolyhedralZone.h"
 
 class SFXAmbience;
 
 
 /// Template mixin to add ability to hold a custom SFXAmbience to
 /// a SceneObject.
-class SceneAmbientSoundObject : public ScenePolyhedralZone
+template< typename Base >
+class SceneAmbientSoundObject : public Base
 {
    public:
 
-      typedef ScenePolyhedralZone Parent;
+      typedef Base Parent;
 
    protected:
 

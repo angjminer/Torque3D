@@ -33,7 +33,7 @@ GFX_ImplementTextureProfile( BackBufferDepthProfile,
                              GFXTextureProfile::NoMipmap |
                              GFXTextureProfile::ZTarget |
                              GFXTextureProfile::Pooled,
-                             GFXTextureProfile::NONE );
+                             GFXTextureProfile::None );
 
 GFXGLWindowTarget::GFXGLWindowTarget(PlatformWindow *win, GFXDevice *d)
       : GFXWindowTarget(win), mDevice(d), mContext(NULL), mFullscreenContext(NULL)

@@ -27,9 +27,9 @@
 #include <stdlib.h>
 
 
-const char *stristr(const char *szStringToBeSearched, const char *szSubstringToSearchFor)
+char *stristr(char *szStringToBeSearched, const char *szSubstringToSearchFor)
 {
-   const char *pPos = NULL;
+   char *pPos = NULL;
    char *szCopy1 = NULL;
    char *szCopy2 = NULL;
 
@@ -55,7 +55,7 @@ const char *stristr(const char *szStringToBeSearched, const char *szSubstringToS
       return NULL;
    }
 
-   pPos = strstr((const char*)szCopy1, (const char*)szCopy2);
+   pPos = strstr(szCopy1, szCopy2);
 
    if ( pPos != NULL ) {
       // map to the original string

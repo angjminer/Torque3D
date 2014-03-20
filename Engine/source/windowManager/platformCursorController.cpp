@@ -28,8 +28,8 @@ void PlatformCursorController::pushCursor( S32 cursorID )
    // Place the new cursor shape onto the stack
    mCursors.increment();
 
-   Cursor_Shape &shape = mCursors.last();
-   shape.mCursorType  = Cursor_Shape::TYPE_RESOURCE;
+   CursorShape &shape = mCursors.last();
+   shape.mCursorType  = CursorShape::TYPE_RESOURCE;
    shape.mCursorID    = cursorID;
 
    // Now Change the Cursor Shape.
@@ -42,8 +42,8 @@ void PlatformCursorController::pushCursor( const UTF8 *fileName )
    mCursors.increment();
 
    // Store the Details.
-   Cursor_Shape &shape = mCursors.last();
-   shape.mCursorType  = Cursor_Shape::TYPE_FILE;
+   CursorShape &shape = mCursors.last();
+   shape.mCursorType  = CursorShape::TYPE_FILE;
    shape.mCursorFile  = String::ToString( "%s", fileName );
 
    // Now Change the Cursor Shape.
@@ -71,11 +71,11 @@ void PlatformCursorController::refreshCursor()
    setCursorShape( mCursors.last(), false );
 }
 
-void PlatformCursorController::setCursorShape( const Cursor_Shape &shape, bool reload )
+void PlatformCursorController::setCursorShape( const CursorShape &shape, bool reload )
 {
     switch( shape.mCursorType )
     {
-        case Cursor_Shape::TYPE_RESOURCE :
+        case CursorShape::TYPE_RESOURCE :
             {
 
                 // Set Resource.
@@ -83,7 +83,7 @@ void PlatformCursorController::setCursorShape( const Cursor_Shape &shape, bool r
 
             } break;
 
-        case Cursor_Shape::TYPE_FILE :
+        case CursorShape::TYPE_FILE :
             {
 
                 // Set File.

@@ -29,7 +29,7 @@
 #include "platform/platform.h"
 #include "math/mMath.h"
 
-#include "gfx/gl/tGL/tGL.h"
+#include "gfx/gl/ggl/ggl.h"
 #define __gl_h_
 #include <AGL/agl.h>
 

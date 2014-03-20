@@ -134,7 +134,7 @@ GFX_ImplementTextureProfile(  PostFxTargetProfile,
                               GFXTextureProfile::PreserveSize |
                               GFXTextureProfile::RenderTarget |
                               GFXTextureProfile::Pooled,
-                              GFXTextureProfile::NONE );
+                              GFXTextureProfile::None );
 
 IMPLEMENT_CONOBJECT(PostEffect);
 
@@ -142,7 +142,7 @@ IMPLEMENT_CONOBJECT(PostEffect);
 GFX_ImplementTextureProfile( PostFxTextureProfile,
                             GFXTextureProfile::DiffuseMap,
                             GFXTextureProfile::Static | GFXTextureProfile::PreserveSize | GFXTextureProfile::NoMipmap,
-                            GFXTextureProfile::NONE );
+                            GFXTextureProfile::None );
 
 
 void PostEffect::EffectConst::set( const String &newVal )

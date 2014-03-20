@@ -37,11 +37,11 @@
 
 
 /// A convex space that defines a custom ambient sound space.
-class SFXSpace : public SceneAmbientSoundObject
+class SFXSpace : public SceneAmbientSoundObject< ScenePolyhedralObject< SceneSpace > >
 {
    public:
 
-      typedef SceneAmbientSoundObject Parent;
+      typedef SceneAmbientSoundObject< ScenePolyhedralObject< SceneSpace > > Parent;
 
    protected:
 

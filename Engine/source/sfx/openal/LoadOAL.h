@@ -30,9 +30,6 @@
 #if defined(TORQUE_OS_MAC)
 #  include <OpenAL/al.h>
 #  include <OpenAL/alc.h>
-#elif defined(TORQUE_OS_LINUX)
-#  include <AL/al.h>
-#  include <AL/alc.h>
 #else
 #  include <al/al.h>
 #  include <al/alc.h>

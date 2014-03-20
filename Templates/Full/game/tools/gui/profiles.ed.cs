@@ -764,7 +764,7 @@ singleton GuiControlProfile( GuiInspectorGroupProfile )
    opaque = false;
    border = false;
   
-   bitmap = "tools/editorClasses/gui/images/rollout";
+   bitmap = "tools/editorclasses/gui/images/rollout";
    
    textOffset = "20 0";
 

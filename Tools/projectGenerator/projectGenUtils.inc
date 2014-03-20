@@ -32,7 +32,7 @@ function beginProject($name, $sharedConfig)
     // Set the game project name, this is what your game's exe/dll will be called
     setGameProjectName($name);
     
-    if ($sharedConfig)
+    if (Generator::$platform == "win32" && $sharedConfig)
         beginSolutionConfig( $name, '{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}' );
 
 	
@@ -40,18 +40,18 @@ function beginProject($name, $sharedConfig)
 
 function endProject($sharedConfig)
 {
-    if ($sharedConfig)
+    if (Generator::$platform == "win32" && $sharedConfig)
         endSolutionConfig();
 }
 
 function beginSolutionConfig( $name, $guid = '' )
 {
-	TorqueGenerator::beginSolution( $name, $guid );  
+	Generator::beginSolution( $name, $guid );  
 }
 
 function addSolutionProjectRef( $pname )
 {
-	TorqueGenerator::addSolutionProjectRef( $pname );		
+	Generator::addSolutionProjectRef( $pname );		
 }
 
 // Add a reference to an external project, this is used for WPF projects currently
@@ -59,114 +59,114 @@ function addSolutionProjectRef( $pname )
 // However, it is nice to not have to add the project to the solution whenever you run the project generator
 function addSolutionProjectRefExt( $pname, $ppath, $pguid )
 {
-    TorqueGenerator::addSolutionProjectRefExt( $pname, $ppath, $pguid );		
+    Generator::addSolutionProjectRefExt( $pname, $ppath, $pguid );		
 }
 
 function endSolutionConfig()
 {
-	TorqueGenerator::endSolution();		
+	Generator::endSolution();		
 }
 
 function setPlatform( $platform )
 {      
    echo('   - Setting platform to: ' . $platform . "\n");
    
-   TorqueGenerator::$platform = $platform;
+   Generator::$platform = $platform;
 }
 
 function includeLib( $libName )
 {
-    //echo( "GLP: " . TorqueGenerator::getGeneratorLibsPath() . $libName . "\n" );
+    //echo( "GLP: " . Generator::getGeneratorLibsPath() . $libName . "\n" );
     
-    TorqueGenerator::includeLib( $libName );    
+    Generator::includeLib( $libName );    
 
 }
 
 function includeModule( $modName )
 {
-   require( TorqueGenerator::getGeneratorModulesPath() . $modName . '.inc' );
+   require( Generator::getGeneratorModulesPath() . $modName . '.inc' );
 }
 
 function beginActiveXConfig( $lib_name, $guid = '', $gameDir = 'game', $output_name = '' )
 {    
-	TorqueGenerator::beginActiveXConfig( $lib_name, $guid, $gameDir, $output_name );
+	Generator::beginActiveXConfig( $lib_name, $guid, $gameDir, $output_name );
 }
 
 function endActiveXConfig()
 {
-	TorqueGenerator::endActiveXConfig();
+	Generator::endActiveXConfig();
 }
 
 function beginSafariConfig( $lib_name, $guid = '', $gameDir = 'game', $output_name = '' )
 {    
-	TorqueGenerator::beginSafariConfig( $lib_name, $guid, $gameDir, $output_name );
+	Generator::beginSafariConfig( $lib_name, $guid, $gameDir, $output_name );
 }
 
 function endSafariConfig()
 {
-	TorqueGenerator::endSafariConfig();
+	Generator::endSafariConfig();
 }
 
 function beginSharedLibConfig( $lib_name, $guid = '', $gameDir = 'game', $output_name = '' )
 {    
-	TorqueGenerator::beginSharedLibConfig( $lib_name, $guid, $gameDir, $output_name );
+	Generator::beginSharedLibConfig( $lib_name, $guid, $gameDir, $output_name );
 }
 
 function endSharedLibConfig()
 {
-	TorqueGenerator::endSharedLibConfig();
+	Generator::endSharedLibConfig();
 }
 
 function beginNPPluginConfig( $lib_name, $guid = '', $gameDir = 'game', $output_name = '' )
 {    
-	TorqueGenerator::beginNPPluginConfig( $lib_name, $guid, $gameDir, $output_name );
+	Generator::beginNPPluginConfig( $lib_name, $guid, $gameDir, $output_name );
 }
 
 function endNPPluginConfig()
 {
-	TorqueGenerator::endNPPluginConfig();
+	Generator::endNPPluginConfig();
 }
 
 
 function beginLibConfig( $lib_name, $guid = '', $gameDir = 'game', $output_name = '' )
 {    
-	TorqueGenerator::beginLibConfig( $lib_name, $guid, $gameDir, $output_name );
+	Generator::beginLibConfig( $lib_name, $guid, $gameDir, $output_name );
 }
 
 function endLibConfig()
 {
-	TorqueGenerator::endLibConfig();
+	Generator::endLibConfig();
 }
 
 function beginAppConfig( $app_name, $guid = '', $game_dir = 'game', $output_name = '' )
 {    
-   TorqueGenerator::beginAppConfig( $app_name, $guid, $game_dir, $output_name );
+   Generator::beginAppConfig( $app_name, $guid, $game_dir, $output_name );
 }
 
 function endAppConfig()
 {
-	TorqueGenerator::endAppConfig();
+	Generator::endAppConfig();
 }
 
 function beginSharedAppConfig( $app_name, $guid = '', $game_dir = 'game', $output_name = '' )
 {    
-   TorqueGenerator::beginSharedAppConfig( $app_name, $guid, $game_dir, $output_name );
+   Generator::beginSharedAppConfig( $app_name, $guid, $game_dir, $output_name );
 }
 
 function endSharedAppConfig()
 {
-	TorqueGenerator::endSharedAppConfig();
+	Generator::endSharedAppConfig();
 }
 
 
 function beginCSProjectConfig( $app_name, $guid = '', $game_dir = 'game', $output_name = '' )
 {    
-   TorqueGenerator::beginCSProjectConfig( $app_name, $guid, $game_dir, $output_name );
+   Generator::beginCSProjectConfig( $app_name, $guid, $game_dir, $output_name );
 }
 
 function endCSProjectConfig()
 {
-	TorqueGenerator::endCSProjectConfig();
+	Generator::endCSProjectConfig();
 }
 
 
@@ -175,26 +175,26 @@ function endCSProjectConfig()
 
 function beginModule( $name )
 {
-	TorqueGenerator::beginModule( $name );
+	Generator::beginModule( $name );
 }
 
 function endModule()
 {
-    TorqueGenerator::endModule();	
+    Generator::endModule();	
 }
 
 function addSrcDir( $dir, $recurse = false )
 {
     //echo( "ADD SRC DIR: " . $dir . "\n" );
 
-	TorqueGenerator::addSrcDir( $dir, $recurse );
+	Generator::addSrcDir( $dir, $recurse );
 }
 
 function addSrcFile( $file )
 {
     //echo( "ADD SRC FILE: " . $file . "\n" );
 
-	TorqueGenerator::addSrcFile( $file );
+	Generator::addSrcFile( $file );
 }
 
 function addEngineSrcDir( $dir )
@@ -213,12 +213,12 @@ function addEngineSrcFile( $file )
 
 function addLibSrcDir( $dir )
 {
-	addSrcDir( TorqueGenerator::getLibSrcDir() . $dir );
+	addSrcDir( Generator::getLibSrcDir() . $dir );
 }
 
 function addLibSrcFile( $file )
 {
-	addSrcDir( TorqueGenerator::getLibSrcDir() . $file );
+	addSrcDir( Generator::getLibSrcDir() . $file );
 }
 
 function addLibIncludePath( $path )
@@ -253,29 +253,29 @@ function getAppEngineBinDir()
 
 function getEngineSrcDir()
 {
-	return TorqueGenerator::getEngineSrcDir();
+	return Generator::getEngineSrcDir();
 }
 
 function getLibSrcDir()
 {
-	return TorqueGenerator::getLibSrcDir();
+	return Generator::getLibSrcDir();
 }
 
 function getEngineBinDir()
 {
-	return TorqueGenerator::getEngineBinDir();
+	return Generator::getEngineBinDir();
 }
 
 function addIncludePath( $path )
 {
 	//echo( "ADD INCLUDE: " . $path . "\n" );    
 
-	TorqueGenerator::addIncludePath( $path );
+	Generator::addIncludePath( $path );
 }
 /// Add a preprocessor directive/define
 function addProjectDefine( $d, $v = null )
 {	
-	TorqueGenerator::addProjectDefine( $d, $v );
+	Generator::addProjectDefine( $d, $v );
 }
 /// Add a list of defines in one call
 function addProjectDefines()
@@ -284,148 +284,143 @@ function addProjectDefines()
 	$count = func_num_args();
 	
 	if( $count > 0 )
-		TorqueGenerator::addProjectDefines( $args );
+		Generator::addProjectDefines( $args );
 	else
 		echo( "addProjectDefines() - no arguments passed!" );
 }
 
 function setProjectGUID( $guid )
 {
-	TorqueGenerator::setProjectGUID( $guid );
+	Generator::setProjectGUID( $guid );
 }
 
 function setProjectModuleDefinitionFile( $mdef )
 {
-	TorqueGenerator::setProjectModuleDefinitionFile( $mdef );
+	Generator::setProjectModuleDefinitionFile( $mdef );
 }
 
 
 function addProjectLibDir( $dir )
 {
-    TorqueGenerator::addProjectLibDir( $dir );
+    Generator::addProjectLibDir( $dir );
 }
 
 function addProjectLibInput( $lib_name, $libDebug = null )
 {
-    TorqueGenerator::addProjectLibInput( $lib_name, $libDebug );
+    Generator::addProjectLibInput( $lib_name, $libDebug );
 }
 
 function addProjectIgnoreDefaultLib( $lib )
 {
-	TorqueGenerator::addProjectIgnoreDefaultLib( $lib );
+	Generator::addProjectIgnoreDefaultLib( $lib );
 }
 
 function copyFileToProject( $sourcePath, $projPath )
 {
-    TorqueGenerator::copyFileToProject( $sourcePath, $projPath );
+    Generator::copyFileToProject( $sourcePath, $projPath );
 }
 
 function addProjectDependency( $pd )
 {
-    TorqueGenerator::addProjectDependency( $pd );
+    Generator::addProjectDependency( $pd );
 }
 
 function removeProjectDependency( $pd )
 {
-    TorqueGenerator::removeProjectDependency( $pd );
+    Generator::removeProjectDependency( $pd );
 }
 
 function addProjectReference( $refName, $version = "" )
 {
-    TorqueGenerator::addProjectReference( $refName, $version );
+    Generator::addProjectReference( $refName, $version );
 }
 
 // disable a specific project compiler warning
 function disableProjectWarning( $warning )
 {	
-	TorqueGenerator::disableProjectWarning( $warning );
+	Generator::disableProjectWarning( $warning );
 }
 
 
 function setGameProjectName($name)
 {
-   TorqueGenerator::setGameProjectName($name);
+   Generator::setGameProjectName($name);
 }
 
 function getGameProjectName()
 {
-   return TorqueGenerator::getGameProjectName();
-}
-
-function getGameProjectNameDLL()
-{	
-   return TorqueGenerator::getGameProjectNameDLL();
+   return Generator::getGameProjectName();
 }
 
 function setToolBuild($tb)
 {
-   TorqueGenerator::setToolBuild($tb);
+   Generator::setToolBuild($tb);
 }
 
 function getToolBuild()
 {
-   return TorqueGenerator::getToolBuild();
+   return Generator::getToolBuild();
 }
 
 function setWatermarkBuild($wb)
 {
-   TorqueGenerator::setWatermarkBuild($wb);
+   Generator::setWatermarkBuild($wb);
 }
 
 function getWatermarkBuild()
 {
-   return TorqueGenerator::getWatermarkBuild();
+   return Generator::getWatermarkBuild();
 }
 
 function setPurchaseScreenBuild($psb)
 {
-   TorqueGenerator::setPurchaseScreenBuild($psb);
+   Generator::setPurchaseScreenBuild($psb);
 }
 
 function getPurchaseScreenBuild()
 {
-   return TorqueGenerator::getPurchaseScreenBuild();
+   return Generator::getPurchaseScreenBuild();
 }
 
 function setDemoBuild($db)
 {
-   TorqueGenerator::setDemoBuild($db);
+   Generator::setDemoBuild($db);
 }
 
 function getDemoBuild()
 {
-   return TorqueGenerator::getDemoBuild();
+   return Generator::getDemoBuild();
 }
 
 function setObjectLimitBuild($olb)
 {
-   TorqueGenerator::setObjectLimitBuild($olb);
+   Generator::setObjectLimitBuild($olb);
 }
 
 function getObjectLimitBuild()
 {
-   return TorqueGenerator::getObjectLimitBuild();
+   return Generator::getObjectLimitBuild();
 }
 
 function setTimeOutBuild($tob)
 {
-   TorqueGenerator::setTimeOutBuild($tob);
+   Generator::setTimeOutBuild($tob);
 }
 
 function getTimeOutBuild()
 {
-   return TorqueGenerator::getTimeOutBuild();
+   return Generator::getTimeOutBuild();
 }
 
 function inProjectConfig()
 {
-   return TorqueGenerator::inProjectConfig();
+   return Generator::inProjectConfig();
 }
 
 // On Windows, 1 - Console, 2 - Windows 
 function setProjectSubSystem( $subSystem )
 {
-    TorqueGenerator::setProjectSubSystem( $subSystem );
+    Generator::setProjectSubSystem( $subSystem );
 }
 
 // Sets whether to use /MT or /MD code generation/runtime on Windows
@@ -434,7 +429,7 @@ function setProjectSubSystem( $subSystem )
 // You must include or install via the redistributable package the appropriate VS runtime for end users.  
 function setDLLRuntime ($val)
 {
-    TorqueGenerator::setDLLRuntime( $val );
+    Generator::setDLLRuntime( $val );
 }
 
 //-------------------------------------------------------------------------------- UTIL

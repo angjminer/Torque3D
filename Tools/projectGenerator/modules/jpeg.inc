@@ -30,7 +30,7 @@ addLibSrcDir( 'ljpeg' );
 addLibIncludePath( 'ljpeg' );
 
 // Defines
-	if ( TorqueGenerator::$platform == "360" )
+	if ( Generator::$platform == "360" )
       addProjectDefines( 'NO_GETENV;' );
 
 endModule();

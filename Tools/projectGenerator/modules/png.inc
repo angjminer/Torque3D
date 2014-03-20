@@ -30,7 +30,7 @@ beginModule( 'lpng' );
 	addLibIncludePath( 'lpng' );
 	
 	// Defines
-	if ( TorqueGenerator::$platform == "360" )
+	if ( Generator::$platform == "360" )
       addProjectDefines( 'PNG_NO_ASSEMBLER_CODE' );
 	
 endModule();

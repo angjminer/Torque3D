@@ -45,7 +45,7 @@ class Torque3D
         includeLib( 'convexDecomp' ); 
 
         // Use FMOD on consoles
-        if ( TorqueGenerator::$platform != "360" && TorqueGenerator::$platform != "ps3" )
+        if ( Generator::$platform != "360" && Generator::$platform != "ps3" )
         {
            includeLib( 'libvorbis' );
            includeLib( 'libogg' );
@@ -55,9 +55,6 @@ class Torque3D
     
     static function beginConfig( $platform, $projectName )
     {
-		//linux: error when debuging on shared config
-		if ( $platform == "linux")
-			self::$sharedConfig = false;
         
         setPlatform( $platform );
 
@@ -66,17 +63,17 @@ class Torque3D
         self::includeDefaultLibs();
         
         $ext = "DLL";
-        if ( TorqueGenerator::$platform == "mac" )
+        if ( Generator::$platform == "mac" )
             $ext = "Bundle";
    
 
         //some platforms will not want a shared config        
-        if ( TorqueGenerator::$platform == "360" || TorqueGenerator::$platform == "ps3")
+        if ( Generator::$platform == "360" || Generator::$platform == "ps3" )
             self::$sharedConfig = false;
 
         //begin either a shared lib config, or a static app config
         if ( self::$sharedConfig )
-            beginSharedLibConfig( getGameProjectName().'_'.$ext, '{C0FCDFF9-E125-412E-87BC-2D89DB971CAB}', 'game', getGameProjectName() );
+            beginSharedLibConfig( getGameProjectName().' '.$ext, '{C0FCDFF9-E125-412E-87BC-2D89DB971CAB}', 'game', getGameProjectName() );
         else
             beginAppConfig( getGameProjectName(), '{C0FCDFF9-E125-412E-87BC-2D89DB971CAB}', 'game', getGameProjectName() );
         
@@ -108,7 +105,7 @@ class Torque3D
         addLibIncludePath( "squish" );
         addLibIncludePath( 'convexDecomp' ); 
         
-        if ( TorqueGenerator::$platform != "360" && TorqueGenerator::$platform != "ps3" )
+        if ( Generator::$platform != "360" && Generator::$platform != "ps3" )
         {
           addLibIncludePath( "libvorbis/include" );
           addLibIncludePath( "libogg/include" );
@@ -124,13 +121,13 @@ class Torque3D
         includeModule( 'basicLighting' );
         includeModule( 'collada' );
         
-        if ( TorqueGenerator::$platform != "360" && TorqueGenerator::$platform != "ps3" )
+        if ( Generator::$platform != "360" && Generator::$platform != "ps3" )
         {
           includeModule( 'vorbis' );
           includeModule( 'theora' );
         }
        
-        if(TorqueGenerator::$platform == "mac" || TorqueGenerator::$platform == "win32" || TorqueGenerator::$platform == "linux")
+        if(Generator::$platform == "mac" || Generator::$platform == "win32")
            includeModule( 'openal' );
 
    
@@ -148,20 +145,20 @@ class Torque3D
         addProjectDependency( 'pcre' );
         addProjectDependency( 'convexDecomp' ); 
         
-        if ( TorqueGenerator::$platform != "360" && TorqueGenerator::$platform != "ps3" )
+        if ( Generator::$platform != "360" && Generator::$platform != "ps3" )
         {
           addProjectDependency( 'libvorbis' );
           addProjectDependency( 'libogg' );
           addProjectDependency( 'libtheora' );
         }
         
-        if ( TorqueGenerator::$platform == "mac" )
+        if ( Generator::$platform == "mac" )
         {    
             addProjectDefine( '__MACOSX__' );
             addProjectDefine( 'LTM_DESC' );
         }
 
-        if (TorqueGenerator::$platform == "win32")
+        if (Generator::$platform == "win32")
         {
             setProjectModuleDefinitionFile('../../' . getLibSrcDir() . 'Torque3D/msvc/torque3d.def');
 
@@ -187,25 +184,7 @@ class Torque3D
             addProjectLibInput('oleaut32.lib');
             addProjectLibInput('version.lib');
 			
-			addProjectLibInput( 'OpenGL32.lib' );
-        }
-		
-		if (TorqueGenerator::$platform == "linux")
-        {			
-			addProjectDefine( 'LINUX' );			
-			//-ldl -lXxf86vm -lXext -lX11 -lXft -lSDL -lstdc++ -lpthread -lGL
-			addProjectLibInput('dl');
-			addProjectLibInput('Xxf86vm');
-			addProjectLibInput('Xext');
-			addProjectLibInput('X11');
-			addProjectLibInput('Xft');
-			addProjectLibInput('SDL');
-			addProjectLibInput('stdc++');
-			addProjectLibInput('pthread');
-			addProjectLibInput('GL');
-			
-			if ( !self::$sharedConfig )
-				addEngineSrcDir( 'main' );
+			addProjectLibInput( 'OpenGL32.lib' ); 
 	    }
         
         // Include project specific sources in the project/buildFiles/config/projectCode.conf
@@ -232,37 +211,31 @@ class Torque3D
 
                 addEngineSrcDir( 'main' );
                 
-                if (TorqueGenerator::$platform == "win32")
+                if (Generator::$platform == "win32")
                 {
                     addProjectDefine( 'WIN32' );
-                    addProjectDependency( getGameProjectName() . '_DLL' );
-                }
-				
-				if (TorqueGenerator::$platform == "linux")
-                {
-                    addProjectDefine( 'LINUX' );
-                    addProjectDependency( getGameProjectName() . '_DLL' );
+                    addProjectDependency( getGameProjectName() . ' DLL' );
                 }
 
-                if (TorqueGenerator::$platform == "mac")
+                if (Generator::$platform == "mac")
                 {
                     addProjectDefine( '__MACOSX__' );
-                    addProjectDependency( getGameProjectName() . '_Bundle' );
-                    addProjectDependency( getGameProjectName() . '_Plugin' );
+                    addProjectDependency( getGameProjectName() . ' Bundle' );
+                    addProjectDependency( getGameProjectName() . ' Plugin' );
                 }
 
             endSharedAppConfig();
         }
         
         // Add solution references for Visual Studio projects
-        if (TorqueGenerator::$platform == "win32" || TorqueGenerator::$platform == "linux" ||TorqueGenerator::$platform == "360" || TorqueGenerator::$platform == "ps3")
+        if (Generator::$platform == "win32" || Generator::$platform == "360" || Generator::$platform == "ps3")
         {
            if ( !self::$sharedConfig )
               beginSolutionConfig( getGameProjectName(), '{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}' );
               
               addSolutionProjectRef( getGameProjectName() );
               if ( self::$sharedConfig )
-                 addSolutionProjectRef( getGameProjectName() . '_DLL' );
+                 addSolutionProjectRef( getGameProjectName() . ' DLL' );
                  
               addSolutionProjectRef( 'collada_dom' );
               addSolutionProjectRef( 'ljpeg' );
@@ -276,10 +249,10 @@ class Torque3D
               addSolutionProjectRef( 'zlib' );
               addSolutionProjectRef( 'convexDecomp' ); 
               
-              if (TorqueGenerator::$platform == "win32" || TorqueGenerator::$platform == "linux")
+              if (Generator::$platform == "win32")
               {
-				 addSolutionProjectRef( 'libvorbis' ); 
                  addSolutionProjectRef( 'libogg' );                 
+                 addSolutionProjectRef( 'libvorbis' );
                  addSolutionProjectRef( 'libtheora' );
               }
               

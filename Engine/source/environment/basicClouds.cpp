@@ -91,6 +91,8 @@ BasicClouds::BasicClouds()
    mTexOffset[0].set( 0.5f, 0.5f );
    mTexOffset[1].set( 0.5f, 0.5f );
    mTexOffset[2].set( 0.5f, 0.5f );
+
+   mDiffuseMapReg = -1;
 }
 
 IMPLEMENT_CO_NETOBJECT_V1( BasicClouds );
@@ -129,6 +131,7 @@ bool BasicClouds::onAdd()
       mTexScaleSC = mShader->getShaderConstHandle( "$texScale" );
       mTexDirectionSC = mShader->getShaderConstHandle( "$texDirection" );
       mTexOffsetSC = mShader->getShaderConstHandle( "$texOffset" );
+      mDiffuseMapReg = mShader->getShaderConstHandle( "$diffuseMap" )->getSamplerRegister();
 
       // Create StateBlocks
       GFXStateBlockDesc desc;
@@ -312,7 +315,7 @@ void BasicClouds::renderObject( ObjectRenderInst *ri, SceneRenderState *state, B
       mShaderConsts->setSafe( mTexDirectionSC, mTexDirection[i] * mTexSpeed[i] );
       mShaderConsts->setSafe( mTexOffsetSC, mTexOffset[i] );         
 
-      GFX->setTexture( 0, mTexture[i] );                            
+      GFX->setTexture( mDiffuseMapReg, mTexture[i] );                            
       GFX->setVertexBuffer( mVB[i] );            
 
       GFX->drawIndexedPrimitive( GFXTriangleList, 0, 0, smVertCount, 0, smTriangleCount );

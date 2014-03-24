@@ -20,10 +20,22 @@
 // IN THE SOFTWARE.
 //-----------------------------------------------------------------------------
 
-#include "windowManager/dedicated/dedicatedWindowStub.h"
+#include "tGL.h"
 
+#include "core/strings/stringFunctions.h"
+#include "console/console.h"
 
-PlatformWindowManager *CreatePlatformWindowManager()
+namespace GL
 {
-   return new DedicatedWindowMgr;
+   void gglPerformBinds()
+   {
+      GLenum err = glewInit();
+      AssertFatal(GLEW_OK == err, avar("Error: %s\n", glewGetErrorString(err)) );
+   }
+
+   void gglPerformExtensionBinds(void *context)
+   {
+	
+   }
 }
+

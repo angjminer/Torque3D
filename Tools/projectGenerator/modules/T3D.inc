@@ -83,6 +83,9 @@ switch( Generator::$platform )
    case "win32":
       addEngineSrcDir( 'terrain/hlsl' );
       addEngineSrcDir( 'forest/hlsl' );
+	  
+	  addEngineSrcDir( 'terrain/glsl' );
+      addEngineSrcDir( 'forest/glsl' );
       break;
 
    case "ps3":

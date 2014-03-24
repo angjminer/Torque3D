@@ -140,6 +140,15 @@ switch( Generator::$platform )
       addEngineSrcDir( 'gfx/D3D9' );
       addEngineSrcDir( 'gfx/D3D9/pc' );
       addEngineSrcDir( 'shaderGen/HLSL' );
+	  
+	  // GFX - GGL
+	  addProjectDefines( 'TORQUE_OPENGL' );
+     addProjectDefines( 'GLEW_STATIC' );
+     addLibSrcFile( 'glew/src/glew.c' );
+     addIncludePath( getAppLibSrcDir() . 'glew/include' );
+     addEngineSrcDir( 'gfx/gl' );
+     addEngineSrcDir( 'gfx/gl/tGL' );
+     addEngineSrcDir( 'shaderGen/GLSL' );
       break;
    case "360":
       addEngineSrcDir( 'gfx/D3D9' );
@@ -207,6 +216,8 @@ if ( Generator::$platform == "win32" )
    addProjectLibDir( getAppLibSrcDir() . 'SDL/win32' );
    addProjectLibDir( getAppLibSrcDir() . 'unicode' );
    addProjectLibDir( getAppLibSrcDir() . 'directx8' );
+      
+   addProjectLibInput("Opengl32.lib");
 }
 
 ?>

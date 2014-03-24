@@ -313,8 +313,8 @@ void BasicClouds::renderObject( ObjectRenderInst *ri, SceneRenderState *state, B
 
       mShaderConsts->setSafe( mTexScaleSC, mTexScale[i] );
       mShaderConsts->setSafe( mTexDirectionSC, mTexDirection[i] * mTexSpeed[i] );
-      mShaderConsts->setSafe( mTexOffsetSC, mTexOffset[i] );
-      
+      mShaderConsts->setSafe( mTexOffsetSC, mTexOffset[i] );         
+
       GFX->setTexture( mDiffuseMapReg, mTexture[i] );                            
       GFX->setVertexBuffer( mVB[i] );            
 

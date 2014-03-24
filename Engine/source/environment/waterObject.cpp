@@ -748,7 +748,7 @@ void WaterObject::renderObject( ObjectRenderInst *ri, SceneRenderState *state, B
 }
 
 void WaterObject::setCustomTextures( S32 matIdx, U32 pass, const WaterMatParams &paramHandles )
-{   
+{
    // Always use the ripple texture.
    GFX->setTexture( paramHandles.mRippleSamplerSC->getSamplerRegister(pass), mRippleTex );
 

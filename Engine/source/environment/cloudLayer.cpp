@@ -318,7 +318,6 @@ void CloudLayer::prepRenderImage( SceneRenderState *state )
 
 void CloudLayer::renderObject( ObjectRenderInst *ri, SceneRenderState *state, BaseMatInstance *mi )
 {
-    GFXDEBUGEVENT_SCOPE( CloudLayer_renderObject, ColorF::WHITE );
    GFXTransformSaver saver;
 
    const Point3F &camPos = state->getCameraPosition();

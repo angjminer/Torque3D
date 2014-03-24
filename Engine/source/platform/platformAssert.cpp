@@ -94,30 +94,30 @@ bool PlatformAssert::process(Type         assertType,
                              U32          lineNumber,
                              const char  *message)
 {
-    // If we're somehow recursing, just die.
-    if(processing)
-        Platform::debugBreak();
-    
-    processing = true;
+   // If we're somehow recursing, just die.
+   if(processing)
+      Platform::debugBreak();
+
+   processing = true;
    bool ret = true;
-    
-    // always dump to the Assert to the Console
-    if (Con::isActive())
-    {
-        if (assertType == Warning)
+
+   // always dump to the Assert to the Console
+   if (Con::isActive())
+   {
+      if (assertType == Warning)
          Con::warnf(ConsoleLogEntry::Assert, "%s(%ld) : %s - %s", filename, lineNumber, typeName[assertType], message);
-        else
+      else
 	      Con::errorf(ConsoleLogEntry::Assert, "%s(%ld) : %s - %s", filename, lineNumber, typeName[assertType], message);
-    }
-    
-    // if not a WARNING pop-up a dialog box
-    if (assertType != Warning)
-    {
-        // used for processing navGraphs (an assert won't botch the whole build)
-        if(Con::getBoolVariable("$FP::DisableAsserts", false) == true)
-            Platform::forceShutdown(1);
-        
-        char buffer[2048];
+   }
+
+   // if not a WARNING pop-up a dialog box
+   if (assertType != Warning)
+   {
+      // used for processing navGraphs (an assert won't botch the whole build)
+      if(Con::getBoolVariable("$FP::DisableAsserts", false) == true)
+         Platform::forceShutdown(1);
+
+      char buffer[2048];
       dSprintf(buffer, 2048, "%s(%ld) : %s", filename, lineNumber, typeName[assertType] );
 
 #ifdef TORQUE_DEBUG
@@ -127,14 +127,14 @@ bool PlatformAssert::process(Type         assertType,
       bool retry = displayMessageBox(buffer, message, ((assertType == Fatal) ? true : false) );
 #endif
       if(!retry)
-                    Platform::forceShutdown(1);
+         Platform::forceShutdown(1);
       
       ret = askToEnterDebugger(message);
-    }
-    
-    processing = false;
-    
-    return ret;
+   }
+
+   processing = false;
+
+   return ret;
 }
 
 bool PlatformAssert::processingAssert()
